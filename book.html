@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Ayush D</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You kido❤️
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />From your bunny AG💞🐰🐰❤️🐼
+          </p>
+        </div>
+        <div class="back">
+          <h2>My world🌍❤️❤️✨</h2>
+
+       <p>Gargi, you are everything to me, more than words could ever express. Since the moment you came into my life,
+        everything has changed for the better. Life feels like a beautiful dream, and I’m living it with you by my side.
+        
+        You are my world, my heart, and my greatest blessing. I am forever grateful for you and the love you bring into my life every single day.
+        
+        Thank you for making my life complete, for being the light that fills my heart. I love you more than you could ever know.💖</p>
+
+          <p>
+            one of the best day of my life 21 march 2022 <br />first time we meet
+            At addat lawn
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Allen  to long distance Relationship❤️✨</h2>
+          <p>
+            It’s incredible to think how, just a little while ago, we were in the same coaching but had different batches. I switched from the morning batch to the evening one, and that small change led to us connecting through a friends' group, then to chatting on Snapchat, and before I knew it, we became best friends.
+            At first, I didn’t know how things would unfold or if we’d connect, but now, after spending so much time together, I realize just how special what we have is.
+You’re are the best kido. 💖
+
+your laughter, the way you make me smile — everything about you has found a special place in my heart. I never expected to meet someone like you, but now, I can’t imagine my life without you in it.
+
+Maybe it wasn’t fate or luck, but the effort we both put in and the love we shared that brought us together.. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>You’re the magic that makes my world shine. ✨💖</h2>
+          <p>
+            There’s something about you that makes everything better
+            the way you smile, the way you care, and the warmth you bring into my life. 
+            
+            You’re a true blessing, and I’m so thankful for you. Every moment with you feels special, and I can’t imagine my world without you in it. 💕
+            
+            You make even the simplest moments feel extraordinary, and every day with you is a gift. I’m so lucky to have you by my side. 💖            
+            With you, every day feels like a beautiful new chapter in the best story I’ve ever known. 💕          </p>
+        </div>
+        <div class="back">
+          <h2>You shine in ways words can’t capture. 🌟 💫✨</h2>
+          <p>
+            You are my best friend, my girlfriend, and my everything. I’m so proud of you for all that you are and all that you do. Every day with you feels like a gift, and I’m lucky to have you in my life.
+You are a the best.
+
+You’re the best anchor, always steady and supportive, someone I can count on no matter what. Your strength and care make everything easier, and I’m so grateful for your presence in my life.
+No challenge is too big for you, and no goal is out of reach. You inspire those around you to be better, to dream bigger, and to believe in themselves. Watching you grow and achieve so much makes me proud to know you. 🌟
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+            The best part of my day is always when I get a text from you. No matter what kind of mood I'm in, it instantly lifts my spirits and makes me smile. Just hearing from you brightens everything, and I can’t help but feel happy.            You have a way of making the simplest moments special.
+            
+            Every little detail you share with me, whether big or small, just makes me feel so good. It’s like we’re right there with each other, even if we’re miles apart. It’s amazing how your words can make me feel so close to you.            
+            The video calls we have every night are something I truly cherish. No matter how exhausted we are, those moments of seeing your face and hearing your voice help me relax and make me feel at ease.          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>Happiest valentines day kido❤️💞💫💖</h1>
+          <p>
+            Happy Valentine’s Day, my love! Even though we’re apart, you’re always in my heart, and I’m thinking of you constantly.
+            I miss you more than words can express, and every day without you feels a little emptier. But knowing how strong our love is keeps me going, and I can’t wait to be with you again.            
+            You mean the world to me, and my love for you grows more with each passing day.            
+            Soon, we’ll be together again, creating even more beautiful memories, but until then, just know how deeply I love you. You’re my everything.          </p>
+        </div>
+        <div class="back">
+          <h1>Always with you kido 💖✨</h1>
+          <p>
+            I want you to know that I’m always here for you, no matter what. Whether things are going great or you’re facing tough times, I’ll be by your side.
+            I’ll be there for you in every way I can, supporting you through anything life throws your way. You don’t have to face anything alone.            
+            Through all the ups and downs, I’ll be right there with you, cheering you on and helping you stay strong.            
+            I want to be your biggest supporter, always lifting you up and making sure you know how amazing you are. You mean the world to me, and I’ll always have your back          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>you are Just amazing my girl ✨💖</h2>
+          <p>
+            My sweet little panda, sugar boo,
+            I just have to remind you how amazing you are. Every day, I’m truly amazed by your beauty, both inside and out. I’m so lucky to have you in my life.I just had to take a moment to remind you how amazing you are. Every single day, I find myself in greatful i have you. You're such a beautiful soul, inside and out, and I’m so lucky to have you in my life.
+            The way you look at me with those gorgeous eyes its something I can’t even describe. Every time our eyes meet, I feel a rush of love and warmth. It’s like your gaze holds everything I need.And that smile of yours.. It lights up my world in ways I can’t even describe. Every time you smile, it’s like everything else just fades away. Your happiness is contagious, and feel like the luckiest person alive when I see it.            
+            Kido, are beyond amazing. I love you more than words can say, and I’m so thankful to have you by my side. You’re my sweet little panda, my sugar boo. just a small request plz dont trim your hairs you look amazing in long hairs ik you look great in everyharistle still           </p>
+        </div>
+        <div class="back">
+          <p>
+            Ha ik kafi bada hogya hai but i guess its okay .
+            
+            i just thought is baar jada hand written beja note nhi beja gift ke sath toh ye hi sahi 😘
+            
+            Love you Kido💞❤️❤️ 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.png" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>For My sweet little panda 🐰🐼🐼</h3>
+          <p>
+            From her BUttercup😘 /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
